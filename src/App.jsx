@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import SearchBar from './SearchBar';
+import SearchResults from './SearchResults';
+import Spotify from './SpotifyCall';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tracks, setTracks] = useState([]);
+
+  const handleSearch = async (query) => {
+    try {
+      const results = await Spotify.searchTracks(query);
+      setTracks(results); // store results in state
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h1>Make A Playlist!!</h1>
+      <SearchBar onSearch={handleSearch} />
+      <SearchResults tracks={tracks} />
+    </div>
+  );
 }
 
-export default App
+export default App;
