@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #1a1a1a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -22,13 +22,67 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+/* A container INSIDE App that actually holds those three elements */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* left/right */
+  grid-template-rows: auto 1fr;     /* search row, then panels */
+  grid-template-areas:
+    "header header"
+    "results tracklist";
+  gap: 20px;
 }
+
+/* Map each direct child to a grid area */
+.top-element { 
+  grid-area: header;
+  padding: 20px;
+  text-align: center;
+}
+
+/* These classes already exist on your components’ root divs */
+.SearchResults {
+  grid-area: results;
+}
+
+.Tracklist {
+  grid-area: tracklist;
+}
+
+/* OPTIONAL: widen results vs. playlist (2:1 ratio) */
+/* .layout { grid-template-columns: 2fr 1fr; } */
+
+
+
+.top-element {
+  grid-area: header;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Left panel */
+.SearchResults {
+  grid-area: results;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;               /* grid gives us the spacing already */
+  padding: 1em;
+  background-color: #1a1a1a;
+  border: #FFB2B2 3px solid;
+  border-radius: 8px;
+}
+
+/* Right panel */
+.Tracklist {
+  grid-area: tracklist;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  background-color: #1a1a1a;
+  border: #FFB2B2 3px solid;
+  border-radius: 8px;
+}
+
 
 h1 {
   font-size: 3.2em;
@@ -42,7 +96,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #595959;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -65,4 +119,73 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+
+
+.top-element {
+  grid-area: header;
+  padding: 20px;
+  text-align: center;
+}
+
+
+.SearchResults {
+  display: flex;
+  padding: 1em;
+  background-color: #1a1a1a;
+  border:#FFB2B2 3px solid;
+  border-radius: 8px;
+}
+
+.SearchResults-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Creates two columns of equal width */
+  grid-template-rows: repeat(2, auto); /* Creates two rows with automatic height */
+  gap: 20px; /* Adds space between grid items */
+}
+
+.SearchResults-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+}
+
+.Tracklist-items{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Creates two columns of equal width */
+  grid-template-rows: repeat(2, auto); /* Creates two rows with automatic height */
+  gap: 20px; /* Adds space between grid items */
+}
+
+.Tracklist-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+}
+
+
+.Tracklist {
+  display: flex;
+  padding: 1em;
+  background-color: #1a1a1a;
+  border:#FFB2B2 3px solid;
+  border-radius: 8px;
+}
+
+.Tracklist-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Creates two columns of equal width */
+  grid-template-rows: repeat(2, auto); /* Creates two rows with automatic height */
+  gap: 20px; /* Adds space between grid items */
+}
+
+.title{
+  text-align: center;
 }

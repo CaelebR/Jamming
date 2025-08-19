@@ -18,8 +18,9 @@ function SearchBar({ onSearch }) {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search..."
+        className="SearchBar"
       />
-      <button type="submit">Search</button>
+      <button type="submit" className='searchButton'>Search</button>
     </form>
   );
 }
